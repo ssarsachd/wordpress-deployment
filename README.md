@@ -35,7 +35,7 @@ Once the deployment is successful, you can access the WordPress UI by navigating
 Here are some snapshots of the WordPress UI:
 
 ### WordPress Home Page
-![WordPress Home Page](images/wordpress_DashboardHome.jpg)
+![WordPress DemoSite Page](images/wordpress-DashboardHome.jpg)
 
 ### WordPress DemoSite Page
 ![WordPress DemoSite Page](images/wordpress-demosite.jpg)
