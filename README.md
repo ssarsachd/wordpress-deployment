@@ -17,6 +17,3 @@ Please refer to the [Setup Instructions](docs/setup_instructions.md) to get star
 
 ## CI/CD Pipeline
 To learn more about the CI/CD pipeline, check the [Pipeline Description](docs/pipeline_description.md).
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
