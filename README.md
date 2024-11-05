@@ -26,6 +26,17 @@ Please refer to the [Setup Instructions](docs/setup_instructions.md) to get star
 ## CI/CD Pipeline
 To learn more about the CI/CD pipeline, check the [Pipeline Description](docs/pipeline_description.md).
 
+## Accessing WordPress
+Once the deployment is successful, you can access the WordPress UI by navigating to the following IP address in your web browser:
+
+**WordPress UI**: `http://43.205.237.11:80/`
+
+## Snapshots
+Here are some snapshots of the WordPress UI:
+
+### WordPress Home Page
+![WordPress Home Page](images/wordpress_home.png)
+
 ## Conclusion
 This repository provides a comprehensive solution for deploying a WordPress application with a MySQL backend using Docker and a Jenkins CI/CD pipeline. Follow the instructions carefully, particularly those related to managing sensitive data securely through Jenkins credentials.
 
