@@ -35,7 +35,9 @@ Once the deployment is successful, you can access the WordPress UI by navigating
 Here are some snapshots of the WordPress UI:
 
 ### WordPress Home Page
-![WordPress Home Page](images/wordpress_home.png)
+![WordPress Home Page](images/wordpress_DashboardHome.png)
+
+![WordPress Demo Site Page](images/wordpress_demosite.png)
 
 ## Conclusion
 This repository provides a comprehensive solution for deploying a WordPress application with a MySQL backend using Docker and a Jenkins CI/CD pipeline. Follow the instructions carefully, particularly those related to managing sensitive data securely through Jenkins credentials.
