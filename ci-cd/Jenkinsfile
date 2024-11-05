@@ -1,0 +1,84 @@
+pipeline {
+    agent any
+
+    environment {
+        MYSQL_ROOT_PASSWORD = credentials('mysql-root-password')
+        MYSQL_DATABASE = "wordpress"
+        MYSQL_USER = "wpuser"
+        MYSQL_PASSWORD = credentials('mysql-password')
+    }
+
+    stages {
+        stage('Build Docker Images') {
+            steps {
+                script {
+                    sh 'docker build -t mywordpress-image -f /home/ubuntu/DOCKERFILE.wordpress /home/ubuntu'
+                    sh 'docker build -t mymysql-image -f /home/ubuntu/DOCKERFILE.mysql /home/ubuntu'
+                }
+            }
+        }
+
+        stage('Run MySQL Container') {
+            steps {
+                script {
+                    sh '''
+                    docker run -d --name mysql_container \
+                        -e MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD \
+                        -e MYSQL_DATABASE=$MYSQL_DATABASE \
+                        -e MYSQL_USER=$MYSQL_USER \
+                        -e MYSQL_PASSWORD=$MYSQL_PASSWORD \
+                        mymysql-image
+                    '''
+                }
+            }
+        }
+
+        stage('Run WordPress Container') {
+            steps {
+                script {
+                    sh '''
+                    docker run -d --name wordpress_container \
+                        --link mysql_container:mysql \
+                        -e WORDPRESS_DB_HOST=mysql:3306 \
+                        -e WORDPRESS_DB_USER=$MYSQL_USER \
+                        -e WORDPRESS_DB_PASSWORD=$MYSQL_PASSWORD \
+                        -e WORDPRESS_DB_NAME=$MYSQL_DATABASE \
+                        -p 80:80 \
+                        mywordpress-image
+                    '''
+                }
+            }
+        }
+
+        stage('Check Container Status') {
+            steps {
+                script {
+                    sh 'docker ps'
+                }
+            }
+        }
+
+        stage('Check WordPress Logs') {
+            steps {
+                script {
+                    sh 'docker logs wordpress_container'
+                }
+            }
+        }
+
+        stage('Test Deployment') {
+            steps {
+                script {
+                    sh 'sleep 50'
+                    sh 'curl -IL http://43.205.237.11:80/ | grep "200 OK" || exit 1' 
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            echo 'WordPress is up and running!'
+        }
+    }
+}
