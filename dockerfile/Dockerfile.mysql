@@ -1,0 +1,11 @@
+# Base image
+FROM mysql:latest
+
+# Set environment variables (these will be overwritten by environment variables in Jenkins)
+ENV MYSQL_ROOT_PASSWORD=root_password
+ENV MYSQL_DATABASE=wordpress
+ENV MYSQL_USER=wp_user
+ENV MYSQL_PASSWORD=wp_password
+
+# Expose MySQL default port
+EXPOSE 3306
